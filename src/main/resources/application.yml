@@ -1,0 +1,18 @@
+spring:
+ datasource:
+   url: jdbc:mariadb://mysql-marien.alwaysdata.net/marien_db
+   password:  ElisaMathis@2023
+   username:  marien_taps
+   driver-class-name: org.mariadb.jdbc.Driver
+ mail:
+    host: localhost
+    port: 9025
+
+ jpa:
+   hibernate:
+     ddl-auto: update  
+   show-sql: true
+server:
+   servlet:
+     context-path: /api
+
