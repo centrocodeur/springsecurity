@@ -4,6 +4,9 @@ import java.time.Instant;
 import java.util.Map;
 import java.util.Optional;
 
+
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +18,11 @@ import com.webdev.Utilisateur.role.TypeDeRole;
 
 import lombok.AllArgsConstructor;
 
+
+
 @AllArgsConstructor
 @Service
-public class UtilisateurService {
+public class UtilisateurService implements UserDetailsService {
 
   private UtilisateurRepository utilisateurRepository;
   private BCryptPasswordEncoder passwordEncoder;
@@ -65,6 +70,15 @@ public class UtilisateurService {
      utilisateurActiver.setActif(true);
      this.utilisateurRepository.save(utilisateurActiver);
 
+  }
+
+
+  @Override
+  public Utilisateur loadUserByUsername(String username) throws UsernameNotFoundException {
+     return this.utilisateurRepository
+                   .findByEmail(username).orElseThrow(()->
+                     new UsernameNotFoundException("Aucun utilisateur ne correspond à cet identifiant "));
+  
   }
 
 

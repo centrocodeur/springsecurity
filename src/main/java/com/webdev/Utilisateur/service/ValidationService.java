@@ -22,7 +22,7 @@ public class ValidationService {
     Validation validation= new Validation();
     validation.setUtilisateur(utilisateur);
     Instant creation = Instant.now();
-    Instant expiration= creation.plusSeconds(600);
+    Instant expiration= creation.plusSeconds(6000);
     
     validation.setExpiration(expiration);
 
